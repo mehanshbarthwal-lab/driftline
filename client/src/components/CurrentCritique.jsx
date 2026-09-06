@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CheckCircle2, Copy, ArrowRight, Check, Zap, Eye, Compass, ArrowUpRight } from "lucide-react";
+import { CheckCircle2, Copy, ArrowRight, Check, Zap, Eye, Compass, ArrowUpRight, Sparkles } from "lucide-react";
 import CouncilReview from "./CouncilReview.jsx";
 import ChainDetector from "./ChainDetector.jsx";
 
