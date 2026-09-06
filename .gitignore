@@ -14,6 +14,10 @@ node_modules/
 client/node_modules/
 server/node_modules/
 
+# Build artifacts
+dist/
+client/dist/
+
 # Production database storage in production
 server/data/sessions.json
 server/data/uploads/

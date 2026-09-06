@@ -5,7 +5,7 @@
   "type": "module",
   "main": "server/index.js",
   "scripts": {
-    "build": "node -e \"console.log('Production build ready')\"",
+    "build": "npm install --prefix client && npm run build --prefix client",
     "start": "node server/index.js",
     "dev:server": "node server/index.js",
     "dev:client": "npm --prefix client run dev"
