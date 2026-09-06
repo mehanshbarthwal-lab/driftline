@@ -1,47 +1,117 @@
-# Driftline Knowledge Graph Report
+# Graph Report - .  (2026-09-06)
 
-Generated context and architectural audit for Driftline visual diagnostic and drift tracking layer.
+## Corpus Check
+- cluster-only mode — file stats not available
 
-## Executive Architecture Summary
+## Summary
+- 150 nodes · 210 edges · 11 communities
+- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 11 edges (avg confidence: 1.0)
+- Token cost: 0 input · 0 output
 
-Driftline is engineered as a unified fullstack creative diagnostic studio. It prevents generative AI users from burning generation credits on blind retries by providing surgical visual diagnosis, high leverage prompt rewrites, multi advisor council cross checking, and physical drift line deflection tracking relative to a pinned anchor attempt.
+## Graph Freshness
+- Built from commit: `b747c139`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
-## God Nodes and Core Junctions
+## Community Hubs (Navigation)
+- package.json
+- critique.js
+- App.jsx
+- client/package.json
+- devDependencies
+- storage.js
+- Express Server Gateway
+- .oxlintrc.json
+- index.js
+- dependencies
 
-1. **`server/index.js` (Backend Gateway)**
-   Serves as the root API server and static client distributor. Configured with a fifty megabyte payload capacity to handle inline base64 image uploads. Hosts routes for sessions, vision critique, and pipeline chain evaluation.
+## God Nodes (most connected - your core abstractions)
+1. `removeDashes()` - 12 edges
+2. `react` - 9 edges
+3. `keywords` - 8 edges
+4. `calculateDrift()` - 6 edges
+5. `scripts` - 5 edges
+6. `scripts` - 5 edges
+7. `runCouncilPipeline()` - 5 edges
+8. `runVisionCritique()` - 5 edges
+9. `saveToDisk()` - 5 edges
+10. `createSession()` - 5 edges
 
-2. **`client/src/App.jsx` (Frontend Studio Director)**
-   Orchestrates the three column studio layout, session URL state synchronization, attempt history state, preset scenario switching, and active attempt inspection.
+## Surprising Connections (you probably didn't know these)
+- `detectChainConflicts()` --calls--> `removeDashes()`  [EXTRACTED]
+  server/services/chain.js → server/services/llm.js
+- `runChairmanSynthesis()` --calls--> `removeDashes()`  [EXTRACTED]
+  server/services/council.js → server/services/llm.js
+- `parseAdvisorJson()` --calls--> `removeDashes()`  [EXTRACTED]
+  server/services/council.js → server/services/llm.js
+- `runHeuristicCouncil()` --calls--> `removeDashes()`  [EXTRACTED]
+  server/services/council.js → server/services/llm.js
+- `calculateDrift()` --calls--> `removeDashes()`  [EXTRACTED]
+  server/services/drift.js → server/services/llm.js
 
-3. **`server/services/llm.js` (Multimodal Vision Engine)**
-   Direct interface to OpenRouter multimodal vision models (Gemini Flash, Gemma Vision, Dots Vision). Extracts structured JSON diagnoses without generic filler, provides rewritten prompts targeting the single primary bottleneck, and enforces the strict No Dashes Rule across all output strings. Contains a resilient heuristic fallback reserved solely for upstream network outages or quota exhaustion.
+## Import Cycles
+- None detected.
 
-4. **`server/services/council.js` (Multi Advisor Review Council)**
-   Implements Karpathy's council pattern adapted for visual creative workflows. Runs three parallel domain specialist evaluations (Spatial and Anatomy, Style and Prompt Fidelity, Perceptual Realism and Artifacts) followed by a Chairman synthesizer call that determines the unified priority and consensus rating.
+## Communities (11 total, 0 thin omitted)
 
-5. **`server/services/drift.js` (Anchor Drift Engine)**
-   Calculates semantic Jaccard distance and stylistic keyword density shifts relative to Attempt 1 (the immutable anchor). Produces pixel deflection coordinates for the dynamic SVG drift line and triggers deep drift check assessments on every third or fourth attempt.
+### Community 0 - "package.json"
+Cohesion: 0.08
+Nodes (23): author, description, devDependencies, engines, node, keywords, license, main (+15 more)
 
-6. **`server/services/chain.js` (Node Chain Disagreement Detector)**
-   Analyzes sequential pipeline steps to detect aesthetic contradictions (such as soft watercolor generation followed by aggressive eight k edge sharpening) before credits are spent.
+### Community 1 - "critique.js"
+Cohesion: 0.19
+Nodes (19): CONFLICT_PAIRS, detectChainConflicts(), ADVISORS, extractJson(), parseAdvisorJson(), runChairmanSynthesis(), runCouncilPipeline(), runHeuristicCouncil() (+11 more)
 
-## Architectural Decision Records
+### Community 2 - "App.jsx"
+Cohesion: 0.20
+Nodes (9): App(), ChainDetector(), CouncilReview(), CritiqueInput(), CurrentCritique(), Header(), MemoryTrail(), SAMPLE_SCENARIOS (+1 more)
 
-* **Decision 1 : Single Service Fullstack Deployment**
-  Unified Vite React client build with Express static serving into a single container for Render free tier deployment. Eliminates CORS friction, separate domain handshakes, and dual service cold starts.
+### Community 3 - "client/package.json"
+Cohesion: 0.12
+Nodes (16): dependencies, lucide-react, react, react-dom, name, private, scripts, build (+8 more)
 
-* **Decision 2 : Dynamic Bending SVG Drift Line**
-  Visualized the iteration history not merely as static cards, but with an authentic SVG cubic bezier spline that physically bends and deflects outward based on the measured drift score of each attempt relative to Attempt 1.
+### Community 4 - "devDependencies"
+Cohesion: 0.13
+Nodes (15): devDependencies, oxlint, tailwindcss, @tailwindcss/vite, @types/react, @types/react-dom, vite, @vitejs/plugin-react (+7 more)
 
-* **Decision 3 : Pinned Anchor Model**
-  Attempt 1 is permanently pinned as the artistic baseline. All drift metrics, trajectory deviations, and periodic audits measure variance directly against Attempt 1 rather than just consecutive steps.
+### Community 5 - "storage.js"
+Cohesion: 0.24
+Nodes (13): router, addAttempt(), clearSession(), createSession(), DATA_FILE, dataDir, __dirname, __filename (+5 more)
 
-* **Decision 4 : Zero Dashes Compliance**
-  All UI copy, documentation, badge labels, and AI prompt outputs strictly eliminate dashes, hyphens, en dashes, and em dashes, using colons or natural phrasing instead.
+### Community 6 - "Express Server Gateway"
+Cohesion: 0.17
+Nodes (12): Studio Master Component, Chain Disagreement Alert, Council Review Breakdown, Attempt Input and Dropzone, Diagnosis and Action Deck, Memory Trail and Drift Line, Express Server Gateway, Node Chain Conflict Detector (+4 more)
 
-## State and Data Persistence
+### Community 7 - ".oxlintrc.json"
+Cohesion: 0.25
+Nodes (7): plugins, rules, react/only-export-components, react/rules-of-hooks, $schema, oxc, warn
 
-* **Session Model**: `Session { id, created_at, first_attempt_id, title, attempts: [] }`
-* **Attempt Model**: `Attempt { id, session_id, order_index, prompt_text, image_url_or_blob, critique_text, suggested_prompt, impact_estimate, drift_score, drift_note, council_breakdown, consensus, chain_analysis, created_at }`
-* **Storage Location**: `server/data/sessions.json` (persisted on disk, safely excluded from git).
+### Community 8 - "index.js"
+Cohesion: 0.29
+Nodes (6): app, clientDist, __dirname, __filename, router, router
+
+### Community 9 - "dependencies"
+Cohesion: 0.29
+Nodes (7): cors, dotenv, express, dependencies, cors, dotenv, express
+
+## Knowledge Gaps
+- **57 isolated node(s):** `$schema`, `oxc`, `react/rules-of-hooks`, `warn`, `name` (+52 more)
+  These have ≤1 connection - possible missing edges or undocumented components.
+
+## Suggested Questions
+_Questions this graph is uniquely positioned to answer:_
+
+- **Why does `devDependencies` connect `devDependencies` to `client/package.json`?**
+  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+- **Why does `react` connect `App.jsx` to `.oxlintrc.json`?**
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **Are the 6 inferred relationships involving `Express Server Gateway` (e.g. with `Studio Master Component` and `Node Chain Conflict Detector`) actually correct?**
+  _`Express Server Gateway` has 6 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `$schema`, `oxc`, `react/rules-of-hooks` to the rest of the system?**
+  _57 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `package.json` be split into smaller, more focused modules?**
+  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
+- **Should `client/package.json` be split into smaller, more focused modules?**
+  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
+- **Should `devDependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._

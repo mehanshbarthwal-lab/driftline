@@ -1,0 +1,112 @@
+{
+  "client/.oxlintrc.json": {
+    "mtime": 1788696082.0215898,
+    "ast_hash": "5e6e3cea3e89137071c142dd7835b0ef",
+    "semantic_hash": "5e6e3cea3e89137071c142dd7835b0ef"
+  },
+  "client/package.json": {
+    "mtime": 1788696121.4741864,
+    "ast_hash": "52a99fb35363525999b9790077316676",
+    "semantic_hash": "52a99fb35363525999b9790077316676"
+  },
+  "client/src/App.jsx": {
+    "mtime": 1788696394.7110796,
+    "ast_hash": "5552dc671fc7e23287ce534ec9f06e88",
+    "semantic_hash": "5552dc671fc7e23287ce534ec9f06e88"
+  },
+  "client/src/components/ChainDetector.jsx": {
+    "mtime": 1788696366.8735647,
+    "ast_hash": "f7f02ec4d115cad81a57c8b3d48e14cd",
+    "semantic_hash": "f7f02ec4d115cad81a57c8b3d48e14cd"
+  },
+  "client/src/components/CouncilReview.jsx": {
+    "mtime": 1788696362.1752434,
+    "ast_hash": "1906ed1f5aaa1b7cc5ba6d3f7cbea7ef",
+    "semantic_hash": "1906ed1f5aaa1b7cc5ba6d3f7cbea7ef"
+  },
+  "client/src/components/CritiqueInput.jsx": {
+    "mtime": 1788696345.47234,
+    "ast_hash": "116f722522ffe8672f89acdc30db7a4c",
+    "semantic_hash": "116f722522ffe8672f89acdc30db7a4c"
+  },
+  "client/src/components/CurrentCritique.jsx": {
+    "mtime": 1788696356.0748608,
+    "ast_hash": "f0852326a47824ace429389c02cd017d",
+    "semantic_hash": "f0852326a47824ace429389c02cd017d"
+  },
+  "client/src/components/Header.jsx": {
+    "mtime": 1788696333.2039385,
+    "ast_hash": "751a6898c8b4af9886c3b45452490697",
+    "semantic_hash": "751a6898c8b4af9886c3b45452490697"
+  },
+  "client/src/components/MemoryTrail.jsx": {
+    "mtime": 1788696383.35087,
+    "ast_hash": "91b7d84eee56343d9494ba556980c90a",
+    "semantic_hash": "91b7d84eee56343d9494ba556980c90a"
+  },
+  "client/src/data/samples.js": {
+    "mtime": 1788696323.0692062,
+    "ast_hash": "f8541fd9ef0f81d3c78066b0e6e2ec5f",
+    "semantic_hash": "f8541fd9ef0f81d3c78066b0e6e2ec5f"
+  },
+  "client/src/main.jsx": {
+    "mtime": 1788696082.0963316,
+    "ast_hash": "e13723e2574429d9a6d849727e3ff695",
+    "semantic_hash": "e13723e2574429d9a6d849727e3ff695"
+  },
+  "client/vite.config.js": {
+    "mtime": 1788696303.3448784,
+    "ast_hash": "7316a79188f2324bd09eab04e34ba96c",
+    "semantic_hash": "7316a79188f2324bd09eab04e34ba96c"
+  },
+  "package.json": {
+    "mtime": 1788697353.2495625,
+    "ast_hash": "5091ba4be3b3305d49d7ede1cccc801d",
+    "semantic_hash": "5091ba4be3b3305d49d7ede1cccc801d"
+  },
+  "server/index.js": {
+    "mtime": 1788696164.6231446,
+    "ast_hash": "7b9f99326a59dfb80fea4d27119ef119",
+    "semantic_hash": "7b9f99326a59dfb80fea4d27119ef119"
+  },
+  "server/routes/chain.js": {
+    "mtime": 1788696159.8529098,
+    "ast_hash": "c353ef301bac95d4f3972300b557fd1d",
+    "semantic_hash": "c353ef301bac95d4f3972300b557fd1d"
+  },
+  "server/routes/critique.js": {
+    "mtime": 1788696157.279094,
+    "ast_hash": "45dc05941fb274562cd0eaa5fc04bc45",
+    "semantic_hash": "45dc05941fb274562cd0eaa5fc04bc45"
+  },
+  "server/routes/sessions.js": {
+    "mtime": 1788696151.666013,
+    "ast_hash": "32078f074fa791dd5f6f0212f39b7d9c",
+    "semantic_hash": "32078f074fa791dd5f6f0212f39b7d9c"
+  },
+  "server/services/chain.js": {
+    "mtime": 1788696148.5629556,
+    "ast_hash": "4aa065696659ba8a297996be86b46aa1",
+    "semantic_hash": "4aa065696659ba8a297996be86b46aa1"
+  },
+  "server/services/council.js": {
+    "mtime": 1788696269.077351,
+    "ast_hash": "0938c1e27bf97d55c8946b8cd17b6b4a",
+    "semantic_hash": "0938c1e27bf97d55c8946b8cd17b6b4a"
+  },
+  "server/services/drift.js": {
+    "mtime": 1788696142.3109088,
+    "ast_hash": "0c3fd2064e638f85033a1d082165852e",
+    "semantic_hash": "0c3fd2064e638f85033a1d082165852e"
+  },
+  "server/services/llm.js": {
+    "mtime": 1788696260.317075,
+    "ast_hash": "ded39934c0869df16b27ba01d97325b1",
+    "semantic_hash": "ded39934c0869df16b27ba01d97325b1"
+  },
+  "server/services/storage.js": {
+    "mtime": 1788696107.3246834,
+    "ast_hash": "23f8456a5e46200dc9769f9167e5f325",
+    "semantic_hash": "23f8456a5e46200dc9769f9167e5f325"
+  }
+}
