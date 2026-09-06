@@ -3,6 +3,7 @@
 .env*
 !.env.example
 Open router API.txt
+Render API Key.txt
 *API*.txt
 *api*.txt
 *.key
@@ -13,11 +14,7 @@ node_modules/
 client/node_modules/
 server/node_modules/
 
-# Production build outputs
-dist/
-client/dist/
-
-# Persistent database storage in production
+# Production database storage in production
 server/data/sessions.json
 server/data/uploads/
 uploads/
