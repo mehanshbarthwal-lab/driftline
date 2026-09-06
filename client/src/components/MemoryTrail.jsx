@@ -1,5 +1,31 @@
-import React, { useState } from "react";
-import { Compass, AlertTriangle, ArrowDown, Sparkles, ChevronDown, ChevronUp, History, CheckCircle2 } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Compass, AlertTriangle, History } from "lucide-react";
+
+// Numeric count-up helper for animated measurement telemetry
+function CountUpNumber({ value, duration = 1200 }) {
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    let startTimestamp = null;
+    const startVal = 0;
+    const endVal = Number(value) || 0;
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.round(startVal + (endVal - startVal) * eased));
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  }, [value, duration]);
+
+  return <span>{displayValue}</span>;
+}
 
 export default function MemoryTrail({
   attempts = [],
@@ -10,17 +36,16 @@ export default function MemoryTrail({
 
   if (!attempts || attempts.length === 0) {
     return (
-      <div className="bg-[#121418] border border-[#232730] rounded-xl p-6 flex flex-col items-center justify-center text-center gap-3 min-h-[380px] shadow-lg">
-        <div className="w-12 h-12 rounded-xl bg-[#171a22] border border-[#262c37] flex items-center justify-center text-amber-400">
+      <div className="instrument-card rounded-xl p-6 flex flex-col items-center justify-center text-center gap-3 min-h-[400px]">
+        <div className="w-12 h-12 rounded-xl bg-[#11141c] border border-white/10 flex items-center justify-center text-gray-400">
           <History className="w-6 h-6 stroke-[1.5]" />
         </div>
         <div className="max-w-xs">
-          <h3 className="text-sm font-semibold text-white tracking-wide">
-            Memory Trail Empty
+          <h3 className="text-sm font-semibold text-white tracking-tight">
+            Memory Trail Inactive
           </h3>
           <p className="text-xs text-gray-400 mt-1.5 leading-relaxed">
-            Your iteration history and the dynamic drift line will trace here as you commit attempts.
-            Attempt 1 will pin as your immutable anchor.
+            Your iteration history and dynamic drift spline will plot here as attempts commit. Attempt 1 locks as the immutable anchor.
           </p>
         </div>
       </div>
@@ -32,17 +57,15 @@ export default function MemoryTrail({
   };
 
   // Generate SVG path for the dynamic bending Drift Line
-  // Nodes are spaced vertically, with horizontal deflection derived from drift score
-  const itemHeight = 160;
+  const itemHeight = 150;
   const totalHeight = Math.max(200, attempts.length * itemHeight);
   const centerX = 32;
 
   const points = attempts.map((att, idx) => {
     const y = idx * itemHeight + 50;
-    // Deflect based on drift score, alternating directions for dynamic curve
     const deflection = att.deflection_px !== undefined 
       ? att.deflection_px 
-      : Math.round(((att.drift_score || 0) / 100) * 28 * ((idx % 2 === 0) ? 1 : -1));
+      : Math.round(((att.drift_score || 0) / 100) * 26 * ((idx % 2 === 0) ? 1 : -1));
     const x = idx === 0 ? centerX : Math.max(10, Math.min(54, centerX + deflection));
     return { x, y, score: att.drift_score || 0 };
   });
@@ -56,40 +79,48 @@ export default function MemoryTrail({
     pathString += ` C ${p0.x} ${midY}, ${p1.x} ${midY}, ${p1.x} ${p1.y}`;
   }
 
+  // Calculate average drift for telemetry header
+  const nonAnchorAttempts = attempts.slice(1);
+  const avgDrift = nonAnchorAttempts.length > 0
+    ? Math.round(nonAnchorAttempts.reduce((acc, a) => acc + (a.drift_score || 0), 0) / nonAnchorAttempts.length)
+    : 0;
+
   return (
-    <div className="bg-[#121418] border border-[#232730] rounded-xl p-5 shadow-lg flex flex-col gap-4">
+    <div className="instrument-card rounded-xl p-5 flex flex-col gap-4">
       
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-[#21262f] pb-3.5">
+      {/* Header Telemetry */}
+      <div className="flex items-center justify-between border-b border-white/10 pb-3.5">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-md bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
+          <div className="w-6 h-6 rounded-md bg-[#141820] border border-white/10 flex items-center justify-center text-amber-400">
             <Compass className="w-3.5 h-3.5" />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white tracking-wide flex items-center gap-2">
-              Memory Trail
-              <span className="text-[11px] font-mono font-normal text-gray-400">
-                ({attempts.length} attempts)
+            <h3 className="text-sm font-semibold text-white tracking-tight flex items-center gap-2">
+              <span>Trajectory Trail</span>
+              <span className="text-[11px] font-measurement font-normal text-gray-400">
+                [<CountUpNumber value={attempts.length} /> ATTEMPTS]
               </span>
             </h3>
             <p className="text-[11px] text-gray-400">
-              The literal line tracking iteration trajectory from Attempt 1
+              Continuous lineage tracked relative to Attempt 1
             </p>
           </div>
         </div>
 
-        <div className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#181d25] border border-[#29303d] text-gray-400">
-          Anchor Pinned
-        </div>
+        {nonAnchorAttempts.length > 0 && (
+          <div className="text-[10px] font-measurement px-2 py-0.5 rounded bg-white/5 border border-white/10 text-gray-300">
+            AVG DRIFT: <span className="text-amber-400 font-semibold"><CountUpNumber value={avgDrift} />%</span>
+          </div>
+        )}
       </div>
 
-      {/* Main Trail Container with SVG Drift Line */}
+      {/* Main Trail Container with Consequential Motion SVG Drift Spline */}
       <div className="relative flex">
         
-        {/* Left SVG Drift Line Column */}
+        {/* Left SVG Drift Spline Column */}
         <div className="relative w-16 shrink-0 hidden sm:block">
           <svg
-            className="w-full"
+            className="w-full overflow-visible"
             style={{ height: `${totalHeight}px` }}
             viewBox={`0 0 64 ${totalHeight}`}
             fill="none"
@@ -97,52 +128,58 @@ export default function MemoryTrail({
           >
             <defs>
               <linearGradient id="driftGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#f59e0b" />
-                <stop offset="35%" stop-color="#10b981" />
-                <stop offset="70%" stop-color="#06b6d4" />
-                <stop offset="100%" stop-color="#f43f5e" />
+                <stop offset="0%" stopColor="#f59e0b" />
+                <stop offset="30%" stopColor="#10b981" />
+                <stop offset="65%" stopColor="#f59e0b" />
+                <stop offset="100%" stopColor="#f43f5e" />
               </linearGradient>
-              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="2" result="blur" />
-                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-              </filter>
             </defs>
 
-            {/* Faint Center Datum Guideline */}
+            {/* Datum Reference Centerline */}
             <line
               x1={centerX}
               y1="20"
               x2={centerX}
               y2={totalHeight}
-              stroke="#242b37"
-              strokeWidth="1.5"
+              stroke="rgba(255, 255, 255, 0.1)"
+              strokeWidth="1"
               strokeDasharray="3 3"
             />
 
-            {/* Dynamic Bending Drift Line */}
+            {/* Animated Consequential Drift Spline */}
             <path
               d={pathString}
               stroke="url(#driftGradient)"
-              strokeWidth="2.5"
+              strokeWidth="2.2"
               strokeLinecap="round"
-              filter="url(#glow)"
+              className="drift-spline"
             />
 
-            {/* Attempt Nodes */}
+            {/* Attempt Measurement Points */}
             {points.map((p, idx) => (
               <g key={idx}>
                 <circle
                   cx={p.x}
                   cy={p.y}
-                  r="6"
-                  fill={idx === 0 ? "#f59e0b" : p.score > 60 ? "#f43f5e" : "#10b981"}
-                  stroke="#0a0b0d"
+                  r="5"
+                  className="drift-node"
+                  fill={
+                    idx === 0
+                      ? "#f59e0b"
+                      : p.score > 55
+                      ? "#f43f5e"
+                      : p.score > 25
+                      ? "#f59e0b"
+                      : "#10b981"
+                  }
+                  stroke="#060709"
                   strokeWidth="2"
                 />
                 <circle
                   cx={p.x}
                   cy={p.y}
-                  r="2"
+                  r="1.5"
+                  className="drift-node"
                   fill="#ffffff"
                 />
               </g>
@@ -151,12 +188,11 @@ export default function MemoryTrail({
         </div>
 
         {/* Right Cards Column */}
-        <div className="flex-1 flex flex-col gap-4 pb-2">
+        <div className="flex-1 flex flex-col gap-3 pb-2">
           {attempts.map((att, idx) => {
             const isFirst = idx === 0;
             const isSelected = activeAttemptId === att.id;
             const isPromptExpanded = Boolean(expandedPrompts[att.id]);
-            const prevAttempt = idx > 0 ? attempts[idx - 1] : null;
 
             return (
               <div key={att.id} className="flex flex-col gap-2">
@@ -164,40 +200,40 @@ export default function MemoryTrail({
                 {/* Attempt Card */}
                 <div
                   onClick={() => onSelectAttempt(att)}
-                  className={`bg-[#161920] border rounded-xl p-4 transition-all cursor-pointer flex flex-col gap-2.5 ${
+                  className={`instrument-card rounded-lg p-3.5 transition-all cursor-pointer flex flex-col gap-2.5 ${
                     isSelected
-                      ? "border-cyan-500/60 shadow-md shadow-cyan-950/30 bg-[#191d26]"
+                      ? "border-white/30 bg-[#12151e] shadow-md"
                       : isFirst
-                      ? "border-amber-500/40 bg-[#181a20]"
-                      : "border-[#252b36] hover:border-[#38414f]"
+                      ? "border-amber-500/30 bg-[#101217]"
+                      : "hover:border-white/20"
                   }`}
                 >
                   
-                  {/* Top Bar */}
+                  {/* Top Bar with Monospace Measurements */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-semibold text-gray-200">
+                      <span className="font-measurement text-xs font-semibold text-gray-200">
                         #{att.order_index}
                       </span>
                       {isFirst ? (
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-700/50 flex items-center gap-1">
+                        <span className="text-[10px] font-measurement px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-500/30 flex items-center gap-1">
                           <Compass className="w-3 h-3 text-amber-400" />
-                          Pinned Anchor
+                          ANCHOR BASELINE
                         </span>
                       ) : (
-                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${
-                          (att.drift_score || 0) > 60
-                            ? "bg-rose-950/70 text-rose-300 border-rose-800/40"
-                            : (att.drift_score || 0) > 30
-                            ? "bg-amber-950/60 text-amber-300 border-amber-800/40"
-                            : "bg-emerald-950/60 text-emerald-300 border-emerald-800/40"
+                        <span className={`text-[10px] font-measurement px-2 py-0.5 rounded border ${
+                          (att.drift_score || 0) > 55
+                            ? "bg-rose-950/60 text-rose-300 border-rose-500/40"
+                            : (att.drift_score || 0) > 25
+                            ? "bg-amber-950/60 text-amber-300 border-amber-500/40"
+                            : "bg-emerald-950/60 text-emerald-300 border-emerald-500/40"
                         }`}>
-                          Drift : {att.drift_score || 0}%
+                          DRIFT: {att.drift_score || 0}%
                         </span>
                       )}
                     </div>
 
-                    <span className="text-[10px] text-gray-400 font-mono">
+                    <span className="text-[10px] text-gray-400 font-measurement">
                       {new Date(att.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                     </span>
                   </div>
@@ -205,7 +241,7 @@ export default function MemoryTrail({
                   {/* Thumbnail and Prompt Preview */}
                   <div className="flex gap-3">
                     {att.image_url_or_blob && (
-                      <div className="w-16 h-16 rounded-lg overflow-hidden border border-[#2b3341] bg-black shrink-0">
+                      <div className="w-14 h-14 rounded-md overflow-hidden border border-white/10 bg-black shrink-0">
                         <img
                           src={att.image_url_or_blob}
                           alt={`Attempt ${att.order_index}`}
@@ -216,7 +252,7 @@ export default function MemoryTrail({
                     
                     <div className="flex-1 flex flex-col justify-center min-w-0">
                       <p className="text-xs text-gray-300 leading-snug line-clamp-2">
-                        {isPromptExpanded ? att.prompt_text : att.prompt_text}
+                        {att.prompt_text}
                       </p>
                       {att.prompt_text?.length > 70 && (
                         <button
@@ -224,7 +260,7 @@ export default function MemoryTrail({
                             e.stopPropagation();
                             togglePrompt(att.id);
                           }}
-                          className="text-[10px] text-cyan-400 hover:text-cyan-300 flex items-center gap-0.5 mt-1"
+                          className="text-[10px] text-gray-400 hover:text-gray-200 flex items-center gap-0.5 mt-1 cursor-pointer"
                         >
                           {isPromptExpanded ? "Collapse" : "Full prompt"}
                         </button>
@@ -232,13 +268,13 @@ export default function MemoryTrail({
                     </div>
                   </div>
 
-                  {/* One Line Change / Diagnosis Note */}
-                  <div className="bg-[#121419] border border-[#232934] rounded-md px-2.5 py-1.5 text-[11px] text-gray-300 leading-tight">
+                  {/* Diagnosis Note */}
+                  <div className="bg-[#08090d] border border-white/10 rounded px-2.5 py-1.5 text-[11px] text-gray-300 leading-tight">
                     {isFirst ? (
-                      <span className="text-amber-300/90 font-medium">Anchor baseline prompt committed.</span>
+                      <span className="text-amber-300/90 font-medium">Anchor baseline prompt committed</span>
                     ) : (
                       <span>
-                        <strong className="text-gray-400">Diagnosis : </strong>
+                        <span className="text-gray-400 font-medium">Diagnosis: </span>
                         {att.critique_text?.slice(0, 110)}...
                       </span>
                     )}
@@ -246,9 +282,9 @@ export default function MemoryTrail({
 
                 </div>
 
-                {/* Periodic Drift Note Banner (Every 3rd/4th attempt or critical drift) */}
+                {/* Periodic Drift Assessment Banner */}
                 {att.drift_note && (
-                  <div className="bg-[#1a171f] border border-amber-700/40 rounded-lg p-3 flex items-start gap-2 text-xs shadow-sm">
+                  <div className="bg-[#140e11] border border-amber-500/30 rounded-lg p-3 flex items-start gap-2 text-xs shadow-sm">
                     <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                     <div className="flex flex-col gap-0.5">
                       <span className="font-semibold text-amber-300 text-[11px]">

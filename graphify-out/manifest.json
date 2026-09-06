@@ -10,39 +10,39 @@
     "semantic_hash": "52a99fb35363525999b9790077316676"
   },
   "client/src/App.jsx": {
-    "mtime": 1788696394.7110796,
-    "ast_hash": "5552dc671fc7e23287ce534ec9f06e88",
-    "semantic_hash": "5552dc671fc7e23287ce534ec9f06e88"
+    "mtime": 1788701302.2282133,
+    "ast_hash": "2851620102ee4396610625641af7c7f8",
+    "semantic_hash": "2851620102ee4396610625641af7c7f8"
   },
   "client/src/components/ChainDetector.jsx": {
-    "mtime": 1788696366.8735647,
-    "ast_hash": "f7f02ec4d115cad81a57c8b3d48e14cd",
-    "semantic_hash": "f7f02ec4d115cad81a57c8b3d48e14cd"
+    "mtime": 1788701290.4967327,
+    "ast_hash": "4f45dc85c11964faffbe55d4b4bde66f",
+    "semantic_hash": "4f45dc85c11964faffbe55d4b4bde66f"
   },
   "client/src/components/CouncilReview.jsx": {
-    "mtime": 1788696362.1752434,
-    "ast_hash": "1906ed1f5aaa1b7cc5ba6d3f7cbea7ef",
-    "semantic_hash": "1906ed1f5aaa1b7cc5ba6d3f7cbea7ef"
+    "mtime": 1788701285.4768023,
+    "ast_hash": "85f4b9018bfff2b3e8a1f07260e012df",
+    "semantic_hash": "85f4b9018bfff2b3e8a1f07260e012df"
   },
   "client/src/components/CritiqueInput.jsx": {
-    "mtime": 1788696345.47234,
-    "ast_hash": "116f722522ffe8672f89acdc30db7a4c",
-    "semantic_hash": "116f722522ffe8672f89acdc30db7a4c"
+    "mtime": 1788701277.608166,
+    "ast_hash": "8325ea8060ae686f0f1653f7fc60f2ff",
+    "semantic_hash": "8325ea8060ae686f0f1653f7fc60f2ff"
   },
   "client/src/components/CurrentCritique.jsx": {
-    "mtime": 1788696356.0748608,
-    "ast_hash": "f0852326a47824ace429389c02cd017d",
-    "semantic_hash": "f0852326a47824ace429389c02cd017d"
+    "mtime": 1788701253.8023841,
+    "ast_hash": "411fb04f432992bf3879a15232f56b79",
+    "semantic_hash": "411fb04f432992bf3879a15232f56b79"
   },
   "client/src/components/Header.jsx": {
-    "mtime": 1788696333.2039385,
-    "ast_hash": "751a6898c8b4af9886c3b45452490697",
-    "semantic_hash": "751a6898c8b4af9886c3b45452490697"
+    "mtime": 1788701241.1912236,
+    "ast_hash": "7c4a4285b40be23bad1a2ecaba05f4f8",
+    "semantic_hash": "7c4a4285b40be23bad1a2ecaba05f4f8"
   },
   "client/src/components/MemoryTrail.jsx": {
-    "mtime": 1788696383.35087,
-    "ast_hash": "91b7d84eee56343d9494ba556980c90a",
-    "semantic_hash": "91b7d84eee56343d9494ba556980c90a"
+    "mtime": 1788701266.2314682,
+    "ast_hash": "ecb4beb91e7d45277558106fcdd6f825",
+    "semantic_hash": "ecb4beb91e7d45277558106fcdd6f825"
   },
   "client/src/data/samples.js": {
     "mtime": 1788696323.0692062,
