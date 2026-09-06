@@ -18,26 +18,29 @@ export default function Header({
     <header className="sticky top-4 z-40 px-4 max-w-7xl mx-auto w-full transition-all duration-300">
       <div className="island-glass rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4">
         
-        {/* Brand Readout with Luminous Compass Mark */}
+        {/* Brand Readout with Luminous Compass Mark and Live Telemetry Dot */}
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-b from-amber-400/20 to-amber-600/5 border border-amber-400/30 flex items-center justify-center text-amber-400 shadow-[0_0_16px_rgba(245,158,11,0.25)]">
-            <Compass className="w-4 h-4 stroke-[2]" />
+          <div className="relative">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-b from-amber-400/25 to-amber-600/10 border border-amber-400/40 flex items-center justify-center text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.35)]">
+              <Compass className="w-4.5 h-4.5 stroke-[2] animate-[spin_24s_linear_infinite]" />
+            </div>
+            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#090b10] radar-live-pulse" title="Telemetry Active" />
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-bold tracking-tight text-white text-sm sm:text-base">Driftline</span>
-            <span className="text-[10px] font-measurement uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-gray-300 border border-white/10">
-              v2.4
+            <span className="font-sora font-bold tracking-tight text-white text-base">Driftline</span>
+            <span className="text-[10px] font-measurement uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/5 text-amber-300/90 border border-amber-400/20 shadow-[0_0_10px_rgba(245,158,11,0.15)]">
+              Studio 2.4
             </span>
           </div>
         </div>
 
         {/* Center: Segmented Engine Switcher */}
-        <div className="hidden lg:flex items-center bg-[#07090e] p-1 rounded-full border border-white/10 shadow-inner">
+        <div className="hidden lg:flex items-center bg-[#07090e]/90 p-1 rounded-full border border-white/12 shadow-[inset_0_1px_2px_rgba(0,0,0,0.8)] backdrop-blur-md">
           <button
             onClick={() => setCouncilMode(false)}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
               !councilMode
-                ? "bg-white/15 text-white shadow-sm ring-1 ring-white/20"
+                ? "bg-white/15 text-white shadow-sm ring-1 ring-white/25 border border-white/10"
                 : "text-gray-400 hover:text-gray-200"
             }`}
             title="Fast single model visual diagnosis"

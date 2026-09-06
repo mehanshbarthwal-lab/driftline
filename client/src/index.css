@@ -39,15 +39,69 @@
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.01em;
   }
+
+  .font-sora {
+    font-family: "Sora", sans-serif;
+  }
 }
 
-/* Ambient Stage Lighting and Subtle Dot Matrix */
+/* Ambient Stage Lighting and Cyber Radar Matrix (MotionSites Inspired) */
 .stage-canvas {
   background-color: #050608;
   background-image: 
-    radial-gradient(circle at 50% -10%, rgba(245, 158, 11, 0.07) 0%, rgba(20, 24, 33, 0.3) 35%, transparent 65%),
+    radial-gradient(circle at 50% -5%, rgba(245, 158, 11, 0.14) 0%, rgba(6, 182, 212, 0.05) 30%, rgba(20, 24, 33, 0.4) 60%, transparent 80%),
     radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 100% 100%, 24px 24px;
+  background-size: 100% 100%, 28px 28px;
+}
+
+/* MotionSites Dual Layer Glow System (Inspired by Glow Features & Sentinel AI) */
+.glow-card-wrapper {
+  position: relative;
+  border-radius: 1.5rem;
+}
+
+.glow-card-underlay {
+  position: absolute;
+  inset: -3px;
+  border-radius: 1.6rem;
+  opacity: 0;
+  filter: blur(36px);
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s ease;
+  z-index: 0;
+}
+
+.glow-card-underlay-amber {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.4) 0%, rgba(251, 191, 36, 0.25) 50%, rgba(217, 119, 6, 0.35) 100%);
+}
+
+.glow-card-underlay-cyan {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.4) 0%, rgba(56, 189, 248, 0.25) 50%, rgba(14, 165, 233, 0.35) 100%);
+}
+
+.glow-card-underlay-emerald {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(52, 211, 153, 0.25) 50%, rgba(5, 150, 105, 0.35) 100%);
+}
+
+.glow-card-wrapper:hover .glow-card-underlay,
+.glow-card-wrapper.is-active .glow-card-underlay {
+  opacity: 0.6;
+  transform: scale(1.015);
+}
+
+.glow-border-card {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(#090b10, #090b10) padding-box, 
+              linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(245, 158, 11, 0.35) 45%, rgba(255, 255, 255, 0.06) 100%) border-box;
+  border: 1px solid transparent;
+  border-radius: 1.5rem;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glow-card-wrapper:hover .glow-border-card {
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.9), 0 0 28px -4px rgba(245, 158, 11, 0.16), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
 }
 
 /* Double Bezel Doppelrand Nested Enclosure System */
@@ -170,4 +224,50 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #252b38;
+}
+
+/* Atmospheric HUD and Radar Telemetry (Sentinel AI & IntelligentX Inspired) */
+@keyframes radarPulse {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.06); opacity: 1; filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4)); }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+.radar-live-pulse {
+  animation: radarPulse 2.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes scanlineDrift {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}
+
+.hud-inspection-overlay {
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(245, 158, 11, 0.04) 51%
+  );
+  background-size: 100% 4px;
+}
+
+.glow-pill-amber {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.32);
+  color: #fbbf24;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glow-pill-emerald {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.32);
+  color: #34d399;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glow-pill-cyan {
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.32);
+  color: #38bdf8;
+  box-shadow: 0 0 14px rgba(6, 182, 212, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }

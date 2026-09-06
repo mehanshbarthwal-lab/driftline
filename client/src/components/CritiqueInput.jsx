@@ -58,17 +58,18 @@ export default function CritiqueInput({
   };
 
   return (
-    <div className="bezel-shell">
-      <div className="bezel-core p-5 sm:p-6 flex flex-col gap-5">
+    <div className="glow-card-wrapper group/card">
+      <div className="glow-card-underlay glow-card-underlay-amber" />
+      <div className="glow-border-card p-5 sm:p-6 flex flex-col gap-5">
         
         {/* Section Header */}
-        <div className="flex items-center justify-between border-b border-white/5 pb-4">
+        <div className="flex items-center justify-between border-b border-white/8 pb-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-white">
+              <span className="font-sora text-xs font-bold uppercase tracking-wider text-white">
                 Attempt Console
               </span>
-              <span className="text-[10px] font-measurement text-amber-400/90 px-2 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/20">
+              <span className="text-[10px] font-measurement glow-pill-amber px-2.5 py-0.5 rounded-full uppercase tracking-wider font-semibold">
                 INPUT
               </span>
             </div>
@@ -80,7 +81,7 @@ export default function CritiqueInput({
           {image && (
             <button
               onClick={() => setImage(null)}
-              className="text-xs text-gray-400 hover:text-rose-400 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 hover:bg-rose-500/10 border border-white/10 transition-colors cursor-pointer"
+              className="text-xs text-gray-400 hover:text-rose-400 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 hover:bg-rose-500/15 border border-white/10 hover:border-rose-500/30 transition-all cursor-pointer"
               title="Clear active image"
             >
               <Trash2 className="w-3.5 h-3.5" />
@@ -89,7 +90,7 @@ export default function CritiqueInput({
           )}
         </div>
 
-        {/* Image Dropzone */}
+        {/* Image Dropzone with Cyber HUD Targeting */}
         {!image ? (
           <div
             onDragEnter={handleDrag}
@@ -97,10 +98,10 @@ export default function CritiqueInput({
             onDragOver={handleDrag}
             onDrop={handleDrop}
             onClick={() => fileInputRef.current?.click()}
-            className={`border border-dashed rounded-2xl p-7 flex flex-col items-center justify-center gap-3 cursor-pointer transition-all duration-300 ${
+            className={`relative border border-dashed rounded-2xl p-7 flex flex-col items-center justify-center gap-3 cursor-pointer transition-all duration-300 overflow-hidden ${
               dragActive
-                ? "border-amber-400 bg-amber-400/10 shadow-[0_0_24px_rgba(245,158,11,0.15)]"
-                : "border-white/15 hover:border-amber-400/50 bg-[#07080c] hover:bg-[#090b10]"
+                ? "border-amber-400 bg-amber-400/10 shadow-[0_0_30px_rgba(245,158,11,0.2)]"
+                : "border-white/15 hover:border-amber-400/50 bg-[#06070c] hover:bg-[#090b12]"
             }`}
           >
             <input
@@ -110,7 +111,7 @@ export default function CritiqueInput({
               onChange={handleFileChange}
               className="hidden"
             />
-            <div className="w-12 h-12 rounded-full bg-[#10131b] flex items-center justify-center text-amber-400/90 border border-white/10 shadow-sm">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-b from-amber-400/15 to-transparent flex items-center justify-center text-amber-400 border border-amber-400/30 shadow-[0_0_16px_rgba(245,158,11,0.2)] group-hover/card:scale-105 transition-transform">
               <UploadCloud className="w-5 h-5" />
             </div>
             <div className="text-center">
@@ -123,16 +124,27 @@ export default function CritiqueInput({
             </div>
           </div>
         ) : (
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#040507] group">
+          <div className="relative rounded-2xl overflow-hidden border border-amber-400/30 bg-[#040507] group shadow-[0_0_24px_rgba(245,158,11,0.12)]">
             <img
               src={image}
               alt="Attempt preview"
-              className="w-full max-h-56 object-contain mx-auto"
+              className="w-full max-h-60 object-contain mx-auto transition-transform duration-500 group-hover:scale-[1.02]"
             />
-            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+            
+            {/* Cyber HUD Scanline and Reticle Frame */}
+            <div className="absolute inset-0 pointer-events-none hud-inspection-overlay opacity-60" />
+            <div className="absolute top-2 left-2 text-[9px] font-measurement uppercase tracking-wider text-amber-400/80 bg-black/70 px-2 py-0.5 rounded border border-amber-400/30 backdrop-blur-sm">
+              OPTICAL_INPUT: LOCKED
+            </div>
+            <div className="absolute bottom-2 right-2 text-[9px] font-measurement uppercase tracking-wider text-emerald-400/80 bg-black/70 px-2 py-0.5 rounded border border-emerald-400/30 backdrop-blur-sm flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              READY
+            </div>
+
+            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 backdrop-blur-xs">
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-medium border border-white/20 cursor-pointer backdrop-blur-md transition-all"
+                className="px-4 py-2 rounded-full bg-white/15 hover:bg-white/25 text-white text-xs font-medium border border-white/30 cursor-pointer backdrop-blur-md transition-all shadow-[0_0_16px_rgba(255,255,255,0.1)]"
               >
                 Replace Image
               </button>

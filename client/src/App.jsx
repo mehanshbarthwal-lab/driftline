@@ -150,89 +150,101 @@ export default function App() {
         attemptCount={session?.attempts?.length || 0}
       />
 
-      {/* Symmetrical Mission Control Stage Banner */}
-      <section className="max-w-7xl mx-auto w-full px-4 pt-8 pb-6 flex flex-col items-center text-center">
+      {/* Symmetrical Mission Control Stage Banner (Sentinel AI & IntelligentX Inspired) */}
+      <section className="max-w-7xl mx-auto w-full px-4 pt-10 pb-8 flex flex-col items-center text-center relative z-10">
         
-        {/* Eyebrow Micro Pill */}
-        <div className="reveal-step-1 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-300 text-[10px] font-measurement tracking-[0.2em] uppercase shadow-[0_0_12px_rgba(245,158,11,0.15)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+        {/* Eyebrow Micro Pill with Luminous Telemetry Pulse */}
+        <div className="reveal-step-1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-[10px] font-measurement tracking-[0.22em] uppercase shadow-[0_0_16px_rgba(245,158,11,0.2)]">
+          <span className="w-2 h-2 rounded-full bg-amber-400 radar-live-pulse" />
           <span>DIAGNOSTIC STUDIO / ANCHOR LINEAGE</span>
         </div>
 
-        {/* Specular Gradient Title */}
-        <h1 className="reveal-step-1 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-b from-white via-gray-100 to-gray-400 bg-clip-text text-transparent mt-3.5">
-          Visual Diagnosis & Generative Lineage
+        {/* Fluid Typographic Specular Title */}
+        <h1 className="reveal-step-1 font-sora text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.03em] bg-gradient-to-b from-white via-gray-100 to-gray-400 bg-clip-text text-transparent mt-4 max-w-3xl leading-[1.12]">
+          Visual Diagnosis & Generative Drift Tracking
         </h1>
 
         {/* Balanced Sub copy */}
-        <p className="reveal-step-2 text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto mt-2.5 leading-relaxed font-sans">
-          Eliminate blind regenerations. Pin your original anchor attempt, isolate structural bottlenecks across lighting and anatomy, and follow the dynamic drift spline keeping your trajectory on target.
+        <p className="reveal-step-2 text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto mt-3.5 leading-relaxed font-sans font-light">
+          Never regenerate blind again. Pin your foundational attempt, isolate structural bottlenecks across lighting and anatomy, and follow the dynamic drift spline keeping your visual trajectory on target.
         </p>
 
-        {/* Symmetrical 4 Pod Telemetry Rail */}
-        <div className="reveal-step-3 w-full grid grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
+        {/* MotionSites Dual Layer Glowing Telemetry Rail (4 Pods) */}
+        <div className="reveal-step-3 w-full grid grid-cols-2 lg:grid-cols-4 gap-3.5 mt-8">
           
           {/* Pod 1: Anchor Baseline */}
-          <div className="bg-[#08090f] border border-white/10 rounded-2xl p-3.5 flex flex-col items-center justify-center gap-1 shadow-sm">
-            <span className="text-[10px] font-measurement text-gray-400 uppercase tracking-wider">
-              ANCHOR BASELINE
-            </span>
-            <div className="flex items-center gap-1.5 text-xs font-semibold font-measurement">
-              {session?.attempts?.length > 0 ? (
-                <span className="text-amber-400 flex items-center gap-1">
-                  <Compass className="w-3.5 h-3.5 text-amber-400" />
-                  Attempt 1 (Locked)
-                </span>
-              ) : (
-                <span className="text-gray-400 italic">Unpinned (Awaiting #1)</span>
-              )}
+          <div className="glow-card-wrapper group">
+            <div className="glow-card-underlay glow-card-underlay-amber" />
+            <div className="glow-border-card p-4 flex flex-col items-center justify-center gap-1.5 text-center">
+              <span className="text-[10px] font-measurement text-gray-400 uppercase tracking-widest">
+                ANCHOR BASELINE
+              </span>
+              <div className="flex items-center gap-1.5 text-xs font-semibold font-measurement">
+                {session?.attempts?.length > 0 ? (
+                  <span className="text-amber-400 flex items-center gap-1.5 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
+                    <Compass className="w-3.5 h-3.5 text-amber-400" />
+                    Attempt 1 (Locked)
+                  </span>
+                ) : (
+                  <span className="text-gray-400 italic">Unpinned (Awaiting #1)</span>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Pod 2: Engine Mode */}
-          <div className="bg-[#08090f] border border-white/10 rounded-2xl p-3.5 flex flex-col items-center justify-center gap-1 shadow-sm">
-            <span className="text-[10px] font-measurement text-gray-400 uppercase tracking-wider">
-              DIAGNOSTIC ENGINE
-            </span>
-            <div className="flex items-center gap-1.5 text-xs font-semibold font-measurement">
-              {councilMode ? (
-                <span className="text-amber-300 flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                  3 Advisor Council
-                </span>
-              ) : (
-                <span className="text-gray-200 flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5 text-gray-400" />
-                  Fast Single Critic
-                </span>
-              )}
+          <div className="glow-card-wrapper group">
+            <div className="glow-card-underlay glow-card-underlay-cyan" />
+            <div className="glow-border-card p-4 flex flex-col items-center justify-center gap-1.5 text-center">
+              <span className="text-[10px] font-measurement text-gray-400 uppercase tracking-widest">
+                DIAGNOSTIC ENGINE
+              </span>
+              <div className="flex items-center gap-1.5 text-xs font-semibold font-measurement">
+                {councilMode ? (
+                  <span className="text-amber-300 flex items-center gap-1.5 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                    3 Advisor Council
+                  </span>
+                ) : (
+                  <span className="text-cyan-300 flex items-center gap-1.5 drop-shadow-[0_0_8px_rgba(6,182,212,0.3)]">
+                    <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                    Fast Single Critic
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Pod 3: Lineage Depth */}
-          <div className="bg-[#08090f] border border-white/10 rounded-2xl p-3.5 flex flex-col items-center justify-center gap-1 shadow-sm">
-            <span className="text-[10px] font-measurement text-gray-400 uppercase tracking-wider">
-              LINEAGE DEPTH
-            </span>
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-200 font-measurement">
-              <span>{session?.attempts?.length || 0}</span>
-              <span className="text-gray-400 font-normal">COMMITTED</span>
+          <div className="glow-card-wrapper group">
+            <div className="glow-card-underlay glow-card-underlay-emerald" />
+            <div className="glow-border-card p-4 flex flex-col items-center justify-center gap-1.5 text-center">
+              <span className="text-[10px] font-measurement text-gray-400 uppercase tracking-widest">
+                LINEAGE DEPTH
+              </span>
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-200 font-measurement">
+                <span className="text-white text-sm">{session?.attempts?.length || 0}</span>
+                <span className="text-gray-400 font-normal text-[10px]">COMMITTED</span>
+              </div>
             </div>
           </div>
 
           {/* Pod 4: Average Trajectory Drift */}
-          <div className="bg-[#08090f] border border-white/10 rounded-2xl p-3.5 flex flex-col items-center justify-center gap-1 shadow-sm">
-            <span className="text-[10px] font-measurement text-gray-400 uppercase tracking-wider">
-              TRAJECTORY DRIFT
-            </span>
-            <div className="flex items-center gap-1.5 text-xs font-semibold font-measurement">
-              {session?.attempts?.length > 1 ? (
-                <span className="text-amber-400">
-                  {Math.round(session.attempts.slice(1).reduce((acc, a) => acc + (a.drift_score || 0), 0) / (session.attempts.length - 1))}% DEFLECTION
-                </span>
-              ) : (
-                <span className="text-emerald-400">Calibrated Baseline</span>
-              )}
+          <div className="glow-card-wrapper group">
+            <div className="glow-card-underlay glow-card-underlay-amber" />
+            <div className="glow-border-card p-4 flex flex-col items-center justify-center gap-1.5 text-center">
+              <span className="text-[10px] font-measurement text-gray-400 uppercase tracking-widest">
+                TRAJECTORY DRIFT
+              </span>
+              <div className="flex items-center gap-1.5 text-xs font-semibold font-measurement">
+                {session?.attempts?.length > 1 ? (
+                  <span className="text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
+                    {Math.round(session.attempts.slice(1).reduce((acc, a) => acc + (a.drift_score || 0), 0) / (session.attempts.length - 1))}% DEFLECTION
+                  </span>
+                ) : (
+                  <span className="text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]">Calibrated Baseline</span>
+                )}
+              </div>
             </div>
           </div>
 
