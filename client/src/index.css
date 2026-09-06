@@ -2,18 +2,20 @@
 
 @layer base {
   :root {
-    --bg-stage: #060709;
-    --bg-surface: #0c0e13;
-    --bg-elevated: #12151d;
-    --bg-overlay: rgba(10, 12, 17, 0.78);
-    --border-subtle: rgba(255, 255, 255, 0.07);
-    --border-card: rgba(255, 255, 255, 0.09);
+    --bg-stage: #050608;
+    --bg-surface: #0a0c11;
+    --bg-elevated: #11141c;
+    --bg-overlay: rgba(9, 11, 16, 0.82);
+    
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-card: rgba(255, 255, 255, 0.08);
     --border-highlight: rgba(255, 255, 255, 0.16);
+    
     --text-primary: #f3f4f6;
     --text-secondary: #9ca3af;
     --text-tertiary: #6b7280;
     
-    /* State colors reserved strictly for drift and consensus data */
+    /* State colors reserved strictly for drift and consensus telemetry */
     --state-anchor: #f59e0b;
     --state-aligned: #10b981;
     --state-caution: #f59e0b;
@@ -39,36 +41,86 @@
   }
 }
 
-/* Restrained Frosted Glass Chrome */
-.instrument-glass {
-  background: var(--bg-overlay);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--border-card);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+/* Ambient Stage Lighting and Subtle Dot Matrix */
+.stage-canvas {
+  background-color: #050608;
+  background-image: 
+    radial-gradient(circle at 50% -10%, rgba(245, 158, 11, 0.07) 0%, rgba(20, 24, 33, 0.3) 35%, transparent 65%),
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
 }
 
-.instrument-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-card);
-  box-shadow: 0 2px 12px -1px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+/* Double Bezel Doppelrand Nested Enclosure System */
+.bezel-shell {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  padding: 0.375rem;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.instrument-card:hover {
-  border-color: var(--border-highlight);
+.bezel-shell:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Subtle Stage Grid Pattern */
-.stage-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 24px 24px;
+.bezel-core {
+  background: #0a0c11;
+  border-radius: calc(1.5rem - 0.375rem);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Staggered Entrance Motion for Critique View */
-@keyframes instrumentReveal {
+/* Floating Island Glass Header */
+.island-glass {
+  background: rgba(10, 12, 17, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Tactile Button in Button Architecture */
+.btn-pill-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-radius: 9999px;
+  padding: 0.5rem 0.625rem 0.5rem 1.25rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+}
+
+.btn-pill-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+.btn-pill-primary:hover .btn-icon-wrapper {
+  transform: translateX(2px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Staggered Entrance Motion */
+@keyframes stageReveal {
   0% {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
@@ -77,22 +129,22 @@
 }
 
 .reveal-step-1 {
-  animation: instrumentReveal 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: stageReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .reveal-step-2 {
   opacity: 0;
-  animation: instrumentReveal 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.07s forwards;
+  animation: stageReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
 }
 
 .reveal-step-3 {
   opacity: 0;
-  animation: instrumentReveal 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.14s forwards;
+  animation: stageReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.16s forwards;
 }
 
 .reveal-step-4 {
   opacity: 0;
-  animation: instrumentReveal 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.21s forwards;
+  animation: stageReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.24s forwards;
 }
 
 /* Consequential Smooth Motion for SVG Drift Spline */
@@ -110,12 +162,12 @@
   height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #08090c;
+  background: #050608;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e222a;
-  border-radius: 2px;
+  background: #191d26;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2e3542;
+  background: #252b38;
 }
