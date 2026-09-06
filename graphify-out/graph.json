@@ -1,0 +1,106 @@
+{
+  "graph": {
+    "name": "Driftline Knowledge Graph",
+    "version": "1.0.0",
+    "generated_at": "2026-09-06T12:10:00Z"
+  },
+  "nodes": [
+    {
+      "id": "server/index.js",
+      "label": "Express Server Gateway",
+      "type": "god_node",
+      "community": "Backend Gateway",
+      "description": "Unified entry point hosting REST API and statically serving compiled Vite React client"
+    },
+    {
+      "id": "server/services/llm.js",
+      "label": "Multimodal Vision Service",
+      "type": "service",
+      "community": "Vision AI Reasoning",
+      "description": "Interfaces with OpenRouter multimodal endpoints and coordinates live vision critique with graceful fallback"
+    },
+    {
+      "id": "server/services/council.js",
+      "label": "Review Council Service",
+      "type": "service",
+      "community": "Vision AI Reasoning",
+      "description": "Dispatches 3 parallel advisor evaluations (Spatial, Style, Artifacts) and executes Chairman synthesis"
+    },
+    {
+      "id": "server/services/drift.js",
+      "label": "Drift Calculation Engine",
+      "type": "service",
+      "community": "Iteration State and Drift",
+      "description": "Measures Jaccard and stylistic variance from Attempt 1 anchor and computes SVG deflection coordinates"
+    },
+    {
+      "id": "server/services/chain.js",
+      "label": "Node Chain Conflict Detector",
+      "type": "service",
+      "community": "Pipeline Integrity",
+      "description": "Evaluates sequential pipeline nodes to flag contradictory generative instructions"
+    },
+    {
+      "id": "server/services/storage.js",
+      "label": "Session Storage Store",
+      "type": "storage",
+      "community": "Iteration State and Drift",
+      "description": "File backed JSON database managing session lifecycle, attempt sequences, and anchor pinning"
+    },
+    {
+      "id": "client/src/App.jsx",
+      "label": "Studio Master Component",
+      "type": "god_node",
+      "community": "Frontend Studio UI",
+      "description": "Orchestrates 3 column studio layout, session URL state, active attempts, and sample presets"
+    },
+    {
+      "id": "client/src/components/CritiqueInput.jsx",
+      "label": "Attempt Input and Dropzone",
+      "type": "component",
+      "community": "Frontend Studio UI",
+      "description": "Handles image dropzone, prompt editor, simulated pipeline drawer, and primary diagnosis triggers"
+    },
+    {
+      "id": "client/src/components/CurrentCritique.jsx",
+      "label": "Diagnosis and Action Deck",
+      "type": "component",
+      "community": "Frontend Studio UI",
+      "description": "Renders concrete diagnosis text, prompt rewrite, confidence impact calibration, and commit action"
+    },
+    {
+      "id": "client/src/components/MemoryTrail.jsx",
+      "label": "Memory Trail and Drift Line",
+      "type": "component",
+      "community": "Frontend Studio UI",
+      "description": "Renders vertical iteration cards, periodic anchor drift audits, and the dynamic bending SVG drift line"
+    },
+    {
+      "id": "client/src/components/CouncilReview.jsx",
+      "label": "Council Review Breakdown",
+      "type": "component",
+      "community": "Frontend Studio UI",
+      "description": "Visual cards for the 3 domain specialists and consensus metrics"
+    },
+    {
+      "id": "client/src/components/ChainDetector.jsx",
+      "label": "Chain Disagreement Alert",
+      "type": "component",
+      "community": "Frontend Studio UI",
+      "description": "Displays warning banner when conflicting node instructions are detected"
+    }
+  ],
+  "links": [
+    { "source": "server/index.js", "target": "server/services/storage.js", "relation": "persists" },
+    { "source": "server/index.js", "target": "server/services/llm.js", "relation": "executes" },
+    { "source": "server/index.js", "target": "server/services/council.js", "relation": "dispatches" },
+    { "source": "server/index.js", "target": "server/services/drift.js", "relation": "computes" },
+    { "source": "server/index.js", "target": "server/services/chain.js", "relation": "evaluates" },
+    { "source": "client/src/App.jsx", "target": "client/src/components/CritiqueInput.jsx", "relation": "renders" },
+    { "source": "client/src/App.jsx", "target": "client/src/components/CurrentCritique.jsx", "relation": "renders" },
+    { "source": "client/src/App.jsx", "target": "client/src/components/MemoryTrail.jsx", "relation": "renders" },
+    { "source": "client/src/components/CurrentCritique.jsx", "target": "client/src/components/CouncilReview.jsx", "relation": "embeds" },
+    { "source": "client/src/components/CurrentCritique.jsx", "target": "client/src/components/ChainDetector.jsx", "relation": "embeds" },
+    { "source": "client/src/App.jsx", "target": "server/index.js", "relation": "fetches" }
+  ]
+}
