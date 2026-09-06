@@ -6,7 +6,7 @@
 
 Never regenerate blind again. Pin your foundational attempt, diagnose concrete structural and stylistic flaws, and trace iterative lineage across generative workflows.
 
-[![Live Demo](https://img.shields.io/badge/LIVE_DEMO-DRIFTLINE_STUDIO-06B6D4?style=for-the-badge&logo=render&logoColor=white)](https://driftline.onrender.com)
+[![Live Demo](https://img.shields.io/badge/LIVE_DEMO-DRIFTLINE_STUDIO-06B6D4?style=for-the-badge&logo=render&logoColor=white)](https://driftline-rik3.onrender.com)
 [![License](https://img.shields.io/badge/LICENSE-MIT-F59E0B?style=for-the-badge)](LICENSE)
 [![Runtime](https://img.shields.io/badge/RUNTIME-NODE.JS_24-10B981?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
 [![Frontend](https://img.shields.io/badge/FRONTEND-REACT_19_+_VITE-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://vite.dev)
