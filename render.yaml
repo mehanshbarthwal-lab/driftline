@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: driftline
+    name: driftline-studio
     env: node
     plan: free
     buildCommand: npm install
