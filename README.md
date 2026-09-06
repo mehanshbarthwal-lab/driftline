@@ -15,6 +15,16 @@ Never regenerate blind again. Pin your foundational attempt, diagnose concrete s
 
 [Overview](#core-problem-and-value-proposition) • [Architecture](#system-architecture) • [Iteration Lineage](#the-dynamic-drift-line) • [Council Engine](#multi-advisor-council-layer) • [Pipeline Guard](#node-chain-disagreement-detector) • [Quick Start](#quick-start-guide)
 
+<br/>
+<br/>
+
+<a href="#system-architecture">
+  <img src="assets/banner.png" alt="Driftline Architectural Pipeline Banner" width="100%" style="border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);" />
+</a>
+
+<br/>
+<br/>
+
 </div>
 
 ---
@@ -33,9 +43,25 @@ Driftline introduces an intelligent diagnostic layer positioned immediately prio
 > **Built for Studio Excellence**
 > Designed for creative directors, prompt engineers, and visual artists using node based generation tools like Magnific, ImagineArt, and LTX Studio who need surgical feedback rather than generic advice.
 
+<br/>
+
+<div align="center">
+  <img src="assets/app-preview.png" alt="Driftline Studio Live Working Preview" width="100%" style="border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);" />
+</div>
+
+<br/>
+
 ---
 
 ## System Architecture
+
+<br/>
+
+<div align="center">
+  <img src="assets/architecture.png" alt="Driftline System Architecture Flow Diagram" width="100%" style="border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);" />
+</div>
+
+<br/>
 
 ```mermaid
 flowchart TB
